@@ -11,20 +11,24 @@ class LibraryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1- Read the globbal song repository
+    // 1- Read the global song repository
     LibraryViewModel mv = context.watch<LibraryViewModel>();
 
     AsyncValue<List<Song>> asyncValue = mv.songsValue;
 
     Widget content;
     switch (asyncValue.state) {
-      
       case AsyncValueState.loading:
         content = Center(child: CircularProgressIndicator());
         break;
       case AsyncValueState.error:
-        content = Center(child: Text('error = ${asyncValue.error!}', style: TextStyle(color: Colors.red),));
-
+        content = Center(
+          child: Text(
+            'Error: ${asyncValue.error!}',
+            style: TextStyle(color: Colors.red),
+          ),
+        );
+        break;
       case AsyncValueState.success:
         List<Song> songs = asyncValue.data!;
         content = ListView.builder(
@@ -37,6 +41,7 @@ class LibraryContent extends StatelessWidget {
             },
           ),
         );
+        break;
     }
 
     return Padding(
@@ -47,7 +52,6 @@ class LibraryContent extends StatelessWidget {
           SizedBox(height: 16),
           Text("Library", style: AppTextStyles.heading),
           SizedBox(height: 50),
-
           Expanded(child: content),
         ],
       ),
