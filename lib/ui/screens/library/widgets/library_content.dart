@@ -31,15 +31,27 @@ class LibraryContent extends StatelessWidget {
         break;
       case AsyncValueState.success:
         List<Song> songs = asyncValue.data!;
+        final artists = mv.artistsValue.data;
+        if (artists == null) {
+          content = Center(child: CircularProgressIndicator());
+          break;
+        }
         content = ListView.builder(
           itemCount: songs.length,
-          itemBuilder: (context, index) => SongTile(
-            song: songs[index],
-            isPlaying: mv.isSongPlaying(songs[index]),
-            onTap: () {
-              mv.start(songs[index]);
-            },
-          ),
+          itemBuilder: (context, index) {
+            final song = songs[index];
+            final artist = artists.firstWhere(
+              (a) => a.id == song.artistId,
+            );
+            return SongTile(
+              song: song,
+              artist: artist,
+              isPlaying: mv.isSongPlaying(song),
+              onTap: () {
+                mv.start(song, artist: artist);
+              },
+            );
+          },
         );
         break;
     }

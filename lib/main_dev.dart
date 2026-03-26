@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
-import 'data/repositories/artist/artist_repository_firebase.dart';
-import 'data/repositories/artist/artist_repository.dart';
+import 'data/repositories/Artist/artist_repository_firebase.dart';
+import 'data/repositories/Artist/artist_repository.dart';
 import 'data/repositories/songs/song_repository_firebase.dart';
 import 'main_common.dart';
 import 'data/repositories/settings/app_settings_repository_mock.dart';

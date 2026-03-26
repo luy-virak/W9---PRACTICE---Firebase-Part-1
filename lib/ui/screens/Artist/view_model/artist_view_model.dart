@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../data/repositories/artist/artist_repository.dart';
+import '../../../../data/repositories/Artist/artist_repository.dart';
 import '../../../states/player_state.dart';
 import '../../../../model/artist/artist.dart';
 import '../../../utils/async_value.dart';
